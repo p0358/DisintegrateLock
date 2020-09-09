@@ -43,23 +43,23 @@ UIWindow* GetKeyWindow() {
     return foundWindow;
 }
 
-//	Shows an alert box. Used for debugging 
+// Shows an alert box. Used for debugging 
 void ShowAlert(NSString *msg, NSString *title) {
 	UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:title
                                  message:msg
                                  preferredStyle:UIAlertControllerStyleAlert];
 
-    //Add Buttons
+    // Add Buttons
     UIAlertAction* dismissButton = [UIAlertAction
                                 actionWithTitle:@"Cool!"
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action) {
-                                    //Handle dismiss button action here
+                                    // Handle dismiss button action here
 									
                                 }];
 
-    //Add your buttons to alert controller
+    // Add your buttons to alert controller
     [alert addAction:dismissButton];
 
     [GetKeyWindow().rootViewController presentViewController:alert animated:YES completion:nil];
@@ -172,14 +172,14 @@ static DisintegrateLock *__strong disintegrateLock;
 			int localAnimationCounter = animationCounter;
 			//[self reset];
 			
-			//	This is stupid and took too long to figure out. _UICreateScreenUIImage returns 
-			//	a UIImage but doesn't give ownership to ARC, so it is done manually.
+			// This is stupid and took too long to figure out. _UICreateScreenUIImage returns 
+			// a UIImage but doesn't give ownership to ARC, so it is done manually.
 			CFTypeRef ref = (__bridge CFTypeRef)_UICreateScreenUIImage();
 			UIImage *img = (__bridge_transfer UIImage*)ref;
 			imageView.image = img;
 			
 
-			//	Show animation window
+			// show animation window
 			[springboardWindow setHidden:NO];
 
 
