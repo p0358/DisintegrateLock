@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+	<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>Options</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSSwitchCell</string>
+		<key>label</key>
+		<string>Enabled</string>
+		<key>key</key>
+		<string>kEnabled</string>
+		<key>default</key>
+		<true/>
+		<key>defaults</key>
+		<string>net.p0358.disintegratelock</string>
+		<key>PostNotification</key>
+		<string>net.p0358.disintegratelock/ReloadPrefs</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSSwitchCell</string>
+		<key>label</key>
+		<string>Disable in LPM</string>
+		<key>key</key>
+		<string>kLPM</string>
+		<key>default</key>
+		<false/>
+		<key>defaults</key>
+		<string>net.p0358.disintegratelock</string>
+		<key>PostNotification</key>
+		<string>net.p0358.disintegratelock/ReloadPrefs</string>
+	</dict>
+
+	<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>Max animation begin time</string>
+		<key>footerText</key>
+		<string>Default is 0.5. It used to be 2.0.</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSSliderCell</string>
+		<key>key</key>
+		<string>kMaxAnimationBeginTime</string>
+		<key>min</key>
+		<integer>0.1</integer>
+		<key>max</key>
+		<integer>5.0</integer>
+		<key>default</key>
+		<integer>0.5</integer>
+		<key>showValue</key>
+		<true/>
+		<key>isSegmented</key>
+		<false/>
+		<key>defaults</key>
+		<string>net.p0358.disintegratelock</string>
+		<key>PostNotification</key>
+		<string>net.p0358.disintegratelock/ReloadPrefs</string>
+	</dict>
+
+	<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>Animation duration</string>
+		<key>footerText</key>
+		<string>Default is 1.5. It used to be 3.0.</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSSliderCell</string>
+		<key>key</key>
+		<string>kAnimationDuration</string>
+		<key>min</key>
+		<integer>0.1</integer>
+		<key>max</key>
+		<integer>5.0</integer>
+		<key>default</key>
+		<integer>1.5</integer>
+		<key>showValue</key>
+		<true/>
+		<key>isSegmented</key>
+		<false/>
+		<key>defaults</key>
+		<string>net.p0358.disintegratelock</string>
+		<key>PostNotification</key>
+		<string>net.p0358.disintegratelock/ReloadPrefs</string>
+	</dict>
+
+	<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>Animation timing random factor</string>
+		<key>footerText</key>
+		<string>Default is 0.1.</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSSliderCell</string>
+		<key>label</key>
+        <string>Modifier</string>
+		<key>key</key>
+		<string>kAnimationTimingRandomFactor</string>
+		<key>min</key>
+		<real>0</real>
+		<key>max</key>
+		<real>1.0</real>
+		<key>default</key>
+		<real>0.1</real>
+		<key>showValue</key>
+		<true/>
+		<key>isSegmented</key>
+		<false/>
+		<key>defaults</key>
+		<string>net.p0358.disintegratelock</string>
+		<key>PostNotification</key>
+		<string>net.p0358.disintegratelock/ReloadPrefs</string>
+	</dict>
+
+		<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>Estimated amount of triangles</string>
+		<key>footerText</key>
+		<string>Default is 66. It's a sane default. Bigger settings may cause animation lags on some devices. But it's up to you.</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSSliderCell</string>
+		<key>label</key>
+        <string>Modifier</string>
+		<key>key</key>
+		<string>kEstimatedTrianglesCount</string>
+		<key>min</key>
+		<real>1</real>
+		<key>max</key>
+		<real>500</real>
+		<key>default</key>
+		<real>66</real>
+		<key>showValue</key>
+		<true/>
+		<key>isSegmented</key>
+		<true/>
+		<key>defaults</key>
+		<string>net.p0358.disintegratelock</string>
+		<key>PostNotification</key>
+		<string>net.p0358.disintegratelock/ReloadPrefs</string>
+	</dict>
+
+	<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Reset all settings</string>
+			<key>action</key>
+			<string>Reset</string>
+			<key>isDestructive</key>
+			<true/>
+			<key>confirmation</key>
+			<dict>
+				<key>prompt</key>
+				<string>Are you sure? This will respring your device.</string>
+				<key>title</key>
+				<string>Reset!</string>
+				<key>cancelTitle</key>
+				<string>Cancel</string>
+			</dict>
+	</dict>
+
+	<dict>
+		<key>cell</key>
+		<string>PSGroupCell</string>
+		<key>label</key>
+		<string>Developer</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSButtonCell</string>
+		<key>label</key>
+		<string>Reddit (/u/p0358)</string>
+		<key>action</key>
+		<string>OpenReddit</string>
+		<key>icon</key>
+        <string>reddit.png</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSButtonCell</string>
+		<key>label</key>
+		<string>Source code</string>
+		<key>action</key>
+		<string>OpenGithub</string>
+		<key>icon</key>
+        <string>github.png</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<string>PSButtonCell</string>
+		<key>label</key>
+		<string>Donate</string>
+		<key>action</key>
+		<string>OpenPaypal</string>
+		<key>icon</key>
+        <string>paypal.png</string>
+	</dict>
+
+	</array>
+
+	<key>title</key>
+	<string>DisintegrateLock</string>
+</dict>
+</plist>

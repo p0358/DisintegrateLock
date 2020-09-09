@@ -1,0 +1,9 @@
+Package: net.p0358.disintegratelock
+Name: DisintegrateLock
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Awesome disintegrate turning off animation for locking!
+Maintainer: p0358
+Author: p0358
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000), ws.hbang.common (>= 1.15), ${LIBSWIFT}
