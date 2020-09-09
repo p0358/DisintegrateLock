@@ -1,4 +1,3 @@
-#import <HBLog.h>
 #import <Cephei/HBPreferences.h>
 #import <DisintegrateLock-Swift.h>
 
@@ -66,9 +65,7 @@ void ShowAlert(NSString *msg, NSString *title) {
     [GetKeyWindow().rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
-// For some reason HBLog* doesn't work, weird
-
-//	Show log with tweak name as prefix for easy grep
+// Show log with tweak name as prefix for easy grep
 /*static inline void Log(NSString *msg) {
 	NSLog(@"NSLog %@: %@", LogTweakName, msg);
 	HBLogDebug(@"HBLogDebug %@: %@", LogTweakName, msg);
@@ -79,7 +76,7 @@ void ShowAlert(NSString *msg, NSString *title) {
 #define Log(...)
 #endif
 
-//	Log exception info
+// Log exception info
 static inline void LogException(NSException *e) {
 	/*HBLogError(@"%@", @"NSException caught");
 	HBLogError(@"Name: %@", e.name);
@@ -115,11 +112,8 @@ extern UIImage* _UICreateScreenUIImage();
 	UIView *subView;
 	UIImageView *imageView;
 	UIView *whiteOverlay;
-	/*@public bool isAnimationInProgress;
-	int animationCounter;*/
 }
 	-(id)init;
-	//-(UIImage*)screenshot;
 	-(void)showLockAnimation:(float)arg1;
 	-(void)reset;
 @end
@@ -187,9 +181,7 @@ static DisintegrateLock *__strong disintegrateLock;
 
 			//	Show animation window
 			[springboardWindow setHidden:NO];
-			
-			//	Play first animation, which will also play the second one
-			//anim1();
+
 
 			NSInteger localDirection = direction;
 			if (localDirection < 0 || localDirection > 7)
@@ -198,17 +190,12 @@ static DisintegrateLock *__strong disintegrateLock;
 			[subView disintegrate:localDirection estimatedTrianglesCount:estimatedTrianglesCount
 			maxAnimationBeginTime:maxAnimationBeginTime animationDuration:animationDuration animationTimingRandomFactor:animationTimingRandomFactor
 			completion:^{
-			//[subView disintegrate:0 estimatedTrianglesCount:66 completion:^{
-			//[subView disintegrate:0 estimatedTrianglesCount:200 completion:^{
 				if (isAnimationInProgress && localAnimationCounter == animationCounter) {
 					// the purpose of animationCounter is to prevent this block from a stray cancelled animation reset a new ongoing animation
 					[self reset];
 					isAnimationInProgress = false;
 				}
-				//ShowAlert(@"This alert is shown in callback after the animation has been finished, it should mean it works (at least the Swift)", @"Animation finished");
 			}];
-
-			//[NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(reset) userInfo:nil repeats:NO];
 
 		}
 		@catch (NSException *e) {
@@ -230,7 +217,6 @@ static DisintegrateLock *__strong disintegrateLock;
 		[subView setAlpha:1.0f];
 		subView.backgroundColor = [UIColor blackColor];
 		subView.layer.masksToBounds = YES;
-		//[mainView addSubview:subView];
 		[springboardWindow addSubview:subView];
 
 		imageView = [[UIImageView alloc] initWithFrame:springboardWindow.bounds];
@@ -254,7 +240,7 @@ static DisintegrateLock *__strong disintegrateLock;
 
 %hook SpringBoard
 
-	//	Called when springboard is finished launching
+	// called when springboard is finished launching
 	-(void)applicationDidFinishLaunching:(id)application {
 		%orig;
 
@@ -262,7 +248,6 @@ static DisintegrateLock *__strong disintegrateLock;
 
 		//[DisintegrateLock sharedInstance];
 		disintegrateLock = [[DisintegrateLock alloc] init];
-		//ShowAlert(@"DisintegrateLock started", @"Title");
 
 		springboardReady = true;
 	}
@@ -282,42 +267,13 @@ static DisintegrateLock *__strong disintegrateLock;
 			arg2 > 0 && // before screen is about to turn on, it shows "_animateBacklightToFactor()  Backlight:0.000000 Duration:0.000000 Source:3 Silently:0"
 			(!disableInLPM || (![[NSProcessInfo processInfo] isLowPowerModeEnabled])) && 
 			(arg1==0 && [self screenIsOn])
-			///*&& !disintegrateLock->isAnimationInProgress*/) {
 			&& !isAnimationInProgress) {
 
-			//arg2 = totalTime;
-			//arg2 = 10;
-			//arg2 = 5;
-			//arg2 = 2;
 			arg2 = totalTime;
 
-
-			//for (int i = 0; i < 20; i++)	// For stress testing memory leak (all fixed now)
 			[disintegrateLock showLockAnimation:arg2];
 
-			/*[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:^{
-				%orig(arg1, arg2, arg3, arg4, arg5);
-			} userInfo:nil repeats:NO];*/
-			//int64_t delayInSeconds = 5;
-
-			/*dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-
-			dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-				%orig(arg1, arg2, arg3, arg4, arg5);
-			});*/
-			/*[NSTimer scheduledTimerWithTimeInterval:5 repeats:NO block:^(NSTimer *timer) {
-				%orig(arg1, arg2, arg3, arg4, arg5);
-			}];*/
-
-
-		//} else if (/*disintegrateLock->isAnimationInProgress &&*/ arg1 > 0 && ![self screenIsOn]) {
-		} 
-
-		/*else if (isAnimationInProgress && arg1 > 0 && ![self screenIsOn]) {
-			[disintegrateLock reset];
-			//disintegrateLock->isAnimationInProgress = false;
-			isAnimationInProgress = false;
-		}*/
+		}
 
 		//else
 		%orig(arg1, arg2, arg3, arg4, arg5);
@@ -344,51 +300,12 @@ static DisintegrateLock *__strong disintegrateLock;
 %end
 
 
-//	Called whenever any preferences are changed to update variables
 static void prefsDidUpdate() {
 	Log(@"prefsDidUpdate()");
-	/*CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
-	NSDictionary *prefs = nil;
-	if ([NSHomeDirectory() isEqualToString:@"/var/mobile"]) {
-		CFArrayRef keyList = CFPreferencesCopyKeyList((CFStringRef)kIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-		if (keyList != nil) {
-			prefs = (NSDictionary *)CFBridgingRelease(CFPreferencesCopyMultiple(keyList, (CFStringRef)kIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost));
-			if (prefs == nil)
-				prefs = [NSDictionary dictionary];
-			CFRelease(keyList);
-		}
-	} else {
-		prefs = [NSDictionary dictionaryWithContentsOfFile:kSettingsPath];
-	}
-
-
-	enabled = [prefs objectForKey:@"kEnabled"] ? [(NSNumber *)[prefs objectForKey:@"kEnabled"] boolValue] : enabled;
-	disableInLPM = [prefs objectForKey:@"kLPM"] ? [(NSNumber *)[prefs objectForKey:@"kLPM"] boolValue] : disableInLPM;*/
-
-
 	totalTime = maxAnimationBeginTime + animationDuration + (2.0 * animationTimingRandomFactor);
 }
 
-#if DEBUG
-static void DisLockShow() {
-	Log(@"DisLockShow()");
-	[disintegrateLock showLockAnimation:totalTime];
-}
-static void DisLockReset() {
-	Log(@"DisLockReset()");
-	//disintegrateLock->isAnimationInProgress = false;
-	[disintegrateLock reset];
-	isAnimationInProgress = false;
-}
-#endif
-
 %ctor {
-	//reloadPrefs();
-	//CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)reloadPrefs, kSettingsChangedNotification, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-#if DEBUG
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)DisLockShow, (CFStringRef)@"DisLockShow", NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)DisLockReset, (CFStringRef)@"DisLockReset", NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-#endif
 
 	preferences = [[HBPreferences alloc] initWithIdentifier:@"net.p0358.disintegratelock"];
 
@@ -405,5 +322,5 @@ static void DisLockReset() {
     [preferences registerPreferenceChangeBlock:^{
         prefsDidUpdate();
     }];
-	//totalTime = animTime1 + pauseTime1 + animTime2 + animTime3;
+
 }

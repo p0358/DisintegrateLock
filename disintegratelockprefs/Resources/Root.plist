@@ -68,8 +68,6 @@
 			<string>Upper-Right</string>
 			<string>Lower-Left</string>
 			<string>Lower-Right</string>
-			<string>[soon]</string>
-			<string>[soon]</string>
 		</array>
 		<key>validValues</key>
 		<array>
@@ -81,8 +79,6 @@
 			<integer>5</integer>
 			<integer>6</integer>
 			<integer>7</integer>
-			<integer>-1</integer>
-			<integer>-2</integer>
 		</array>
 		<key>PostNotification</key>
 		<string>net.p0358.disintegratelock/ReloadPrefs</string>
