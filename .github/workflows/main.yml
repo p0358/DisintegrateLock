@@ -1,0 +1,31 @@
+# Made by raspberryenvoie
+
+name: Theos server
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Theos
+        run: |
+          # Install depencies
+          brew install ldid make
+          # Set variables for Theos
+          echo "export THEOS=~/theos" >> ~/.bashrc
+          echo PATH=\"$(brew --prefix make)/libexec/gnubin:\$PATH\" >> ~/.bashrc
+          THEOS=~/theos
+          # Download Theos
+          git clone --recursive https://github.com/theos/theos.git $THEOS
+          # Download patched SDKs
+          git clone https://github.com/xybp888/iOS-SDKs.git
+          mv iOS-SDKs/*.sdk $THEOS/sdks
+          rm -rf iOS-SDKs/
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
