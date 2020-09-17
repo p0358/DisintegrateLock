@@ -125,8 +125,8 @@ extension CALayer {
             triangleLayer.contents = triangleImage
             triangleLayer.mask = triangleMaskLayer
             triangleLayer.shouldRasterize = true
-            //triangleLayer.drawsAsynchronously = true
-            triangleLayer.drawsAsynchronously = false
+            triangleLayer.drawsAsynchronously = true
+            //triangleLayer.drawsAsynchronously = false
             triangleLayers.append(triangleLayer)
             self.addSublayer(triangleLayer)
 
