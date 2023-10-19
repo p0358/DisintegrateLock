@@ -7,7 +7,7 @@ on:
     branches: ["*"]
     
 jobs:
-  build-rootless:
+  build:
     runs-on: macos-13
     steps:
       - uses: maxim-lobanov/setup-xcode@v1
