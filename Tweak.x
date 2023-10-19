@@ -29,15 +29,30 @@ NSString *LogTweakName = @"DisintegrateLock";
 bool springboardReady = false;
 
 UIWindow* GetKeyWindow() {
-    UIWindow        *foundWindow = nil;
-    NSArray         *windows = [[UIApplication sharedApplication]windows];
-    for (UIWindow   *window in windows) {
-        if (window.isKeyWindow) {
-            foundWindow = window;
-            break;
-        }
-    }
-    return foundWindow;
+	if (@available(iOS 13, *)) {
+		NSSet *connectedScenes = [UIApplication sharedApplication].connectedScenes;
+		for (UIScene *scene in connectedScenes) {
+			if ([scene isKindOfClass:[UIWindowScene class]]) {
+				UIWindowScene *windowScene = (UIWindowScene *)scene;
+				for (UIWindow *window in windowScene.windows) {
+					if (window.isKeyWindow) {
+						return window;
+					}
+				}
+			}
+		}
+	} else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+		NSArray         *windows = [[UIApplication sharedApplication] windows];
+#pragma clang diagnostic pop
+		for (UIWindow   *window in windows) {
+			if (window.isKeyWindow) {
+				return window;
+			}
+		}
+	}
+	return nil;
 }
 
 // Shows an alert box. Used for debugging 
