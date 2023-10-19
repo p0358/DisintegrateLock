@@ -1,10 +1,12 @@
-#TARGET := iphone:clang:13.5:11.2
-TARGET := iphone:clang:13.5:8.0
-INSTALL_TARGET_PROCESSES = SpringBoard
+ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
+	ARCHS = arm64 arm64e
+	TARGET = iphone:clang:15.5:15.0
+else
+	ARCHS = armv7 armv7s arm64 arm64e
+	TARGET = iphone:clang:14.2:8.0
+endif
 
-#ARCHS = arm64 arm64e
-ARCHS = arm64
-#SYSROOT = $(THEOS)/sdks/iPhoneOS13.3.sdk
+INSTALL_TARGET_PROCESSES = SpringBoard
 
 include $(THEOS)/makefiles/common.mk
 

@@ -1,9 +1,6 @@
 #import <Cephei/HBPreferences.h>
 #import <DisintegrateLock-Swift.h>
-
-#define kIdentifier @"net.p0358.disintegratelock"
-#define kSettingsChangedNotification (CFStringRef)@"net.p0358.disintegratelock/ReloadPrefs"
-#define kSettingsPath @"/var/mobile/Library/Preferences/net.p0358.disintegratelock.plist"
+#import <HBLog.h>
 
 
 //	=============================== Globals ===============================

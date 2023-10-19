@@ -47,15 +47,7 @@
 -(void)Reset {
 	HBPreferences *prefs = [[HBPreferences alloc] initWithIdentifier: @"net.p0358.disintegratelock"];
 	[prefs removeAllObjects];
-	[prefs synchronize];
-
-	//NSFileManager *fm = [NSFileManager defaultManager];
-	//[fm removeItemAtPath: @"/var/mobile/Library/Preferences/net.p0358.disintegratelock.plist" error: nil];
-
-	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("net.p0358.disintegratelock/ReloadPrefs"), NULL, NULL, TRUE);
 	[self reloadSpecifiers];
-
-	//[self Respring];
 }
 
 @end
