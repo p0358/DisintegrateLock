@@ -10,10 +10,6 @@
 	return _specifiers;
 }
 
--(void)Respring {
-    [HBRespringController respring];
-}
-
 -(void)OpenGithub {
 	UIApplication *application = [UIApplication sharedApplication];
 	NSURL *URL = [NSURL URLWithString:@"https://github.com/p0358/DisintegrateLock"];
