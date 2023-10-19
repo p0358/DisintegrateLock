@@ -28,7 +28,7 @@
 		<key>cell</key>
 		<string>PSSwitchCell</string>
 		<key>label</key>
-		<string>Disable in LPM</string>
+		<string>Disable in Low Power Mode</string>
 		<key>key</key>
 		<string>kLPM</string>
 		<key>default</key>
